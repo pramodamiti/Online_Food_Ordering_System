@@ -22,13 +22,24 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Optional<Cart> getCartByUser(Long userId) {
+        // Correctly fetch the cart by userId
         return cartRepository.findById(userId);
     }
 
     @Override
     public CartItem addItemToCart(Long userId, CartItem cartItem) {
-        cartItemRepository.save(cartItem);
-        return cartItem;
+        Cart cart = cartRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Cart not found for user: " + userId));
+
+        // Link the cart item to the user's cart
+        cartItem.setCart(cart);
+
+        // Calculate subtotal if needed
+        if (cartItem.getTotalPrice() != null && cartItem.getQuantity() != null) {
+            cartItem.setSubtotal(cartItem.getTotalPrice() * cartItem.getQuantity());
+        }
+
+        return cartItemRepository.save(cartItem);
     }
 
     @Override
@@ -36,6 +47,12 @@ public class CartServiceImpl implements CartService {
         CartItem existingCartItem = cartItemRepository.findById(cartItemId).orElse(null);
         if (existingCartItem != null) {
             existingCartItem.setQuantity(cartItem.getQuantity());
+            if (cartItem.getTotalPrice() != null) {
+                existingCartItem.setTotalPrice(cartItem.getTotalPrice());
+            }
+            if (existingCartItem.getTotalPrice() != null && existingCartItem.getQuantity() != null) {
+                existingCartItem.setTotalPrice(existingCartItem.getTotalPrice() * existingCartItem.getQuantity());
+            }
             return cartItemRepository.save(existingCartItem);
         }
         return null;
@@ -43,16 +60,22 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void deleteCartItem(Long userId, Long cartItemId) {
-        cartItemRepository.deleteById(cartItemId);
+        Cart cart = cartRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Cart not found for user: " + userId));
+
+        Optional<CartItem> cartItemOpt = cartItemRepository.findById(cartItemId);
+        if (cartItemOpt.isPresent() && cartItemOpt.get().getCart().getCartId().equals(cart.getCartId())) {
+            cartItemRepository.deleteById(cartItemId);
+        }
     }
 
     @Override
     public void clearCart(Long userId) {
-        if (userId != null) {
-            cartItemRepository.deleteAll(); 
-        }else {
-            System.out.println("User id is null");
+        Cart cart = cartRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Cart not found for user: " + userId));
+
+        if (cart.getCartItems() != null && !cart.getCartItems().isEmpty()) {
+            cartItemRepository.deleteAll(cart.getCartItems());
         }
     }
-
 }

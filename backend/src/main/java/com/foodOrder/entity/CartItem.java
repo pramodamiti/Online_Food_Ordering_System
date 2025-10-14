@@ -32,4 +32,13 @@ public class CartItem {
     @JoinColumn(name = "item_id")
     private MenuItem menuItem;
 
+    public void setPrice(Double totalPrice) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setSubtotal(double d) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setSubtotal'");
+    }
+
 }

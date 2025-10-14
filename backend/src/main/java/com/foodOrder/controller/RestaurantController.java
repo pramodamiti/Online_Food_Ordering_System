@@ -23,64 +23,63 @@ public class RestaurantController {
     @Autowired
     private RestaurantService restaurantService;
 
+    // -------------------- Restaurant CRUD --------------------
     @PostMapping
     public Restaurant createRestaurant(@RequestBody Restaurant restaurant) {
         return restaurantService.addRestaurant(restaurant);
     }
 
-    @PutMapping("/{id}")
-    public Restaurant updateRestaurant(@PathVariable Long id, @RequestBody Restaurant restaurant) {
-
-        return restaurantService.updateRestaurant(id, restaurant);
+    @PutMapping("/{restaurantId}")
+    public Restaurant updateRestaurant(@PathVariable Long restaurantId, @RequestBody Restaurant restaurant) {
+        return restaurantService.updateRestaurant(restaurantId, restaurant);
     }
 
     @GetMapping
-    public List<Restaurant> getAllRestourant() {
+    public List<Restaurant> getAllRestaurants() {
         return restaurantService.getAllRestourant();
     }
 
-    @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable Long id) {
-        return restaurantService.getRestaurantById(id);
+    @GetMapping("/{restaurantId}")
+    public Restaurant getRestaurantById(@PathVariable Long restaurantId) {
+        return restaurantService.getRestaurantById(restaurantId);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteRestaurant(@PathVariable Long id) {
-        restaurantService.deleteRestaurant(id);
-        return "Deleted restaurant with ID: " + id;
+    @DeleteMapping("/{restaurantId}")
+    public String deleteRestaurant(@PathVariable Long restaurantId) {
+        restaurantService.deleteRestaurant(restaurantId);
+        return "Deleted restaurant with ID: " + restaurantId;
     }
 
-    // Get all menu items for a restaurant
+    // -------------------- MenuItem CRUD --------------------
     @GetMapping("/{restaurantId}/menu-items")
     public List<MenuItem> getAllMenuItems(@PathVariable Long restaurantId) {
         return restaurantService.getAllMenuItems(restaurantId);
-
     }
 
-// Get a single menu item by ID
     @GetMapping("/{restaurantId}/menu-items/{itemId}")
     public MenuItem getMenuItemById(@PathVariable Long restaurantId, @PathVariable Long itemId) {
-        return restaurantService.getMenuItemById(restaurantId, itemId);
-
+        MenuItem menuItem = restaurantService.getMenuItemById(restaurantId, itemId);
+        if (menuItem == null) {
+            throw new RuntimeException("Menu item not found or does not belong to restaurant: " + restaurantId);
+        }
+        return menuItem;
     }
 
-// Add a new menu item to a restaurant
     @PostMapping("/{restaurantId}/menu-items")
     public MenuItem addMenuItem(@PathVariable Long restaurantId, @RequestBody MenuItem menuItem) {
         return restaurantService.addMenuItem(restaurantId, menuItem);
     }
 
-// Update a menu item
     @PutMapping("/{restaurantId}/menu-items/{itemId}")
-    public MenuItem updateMenuItem(@PathVariable Long restaurantId, @PathVariable Long itemId, @RequestBody MenuItem menuItem) {
+    public MenuItem updateMenuItem(@PathVariable Long restaurantId,
+            @PathVariable Long itemId,
+            @RequestBody MenuItem menuItem) {
         return restaurantService.updateMenuItem(restaurantId, itemId, menuItem);
     }
 
-// Delete a menu item
     @DeleteMapping("/{restaurantId}/menu-items/{itemId}")
     public String deleteMenuItem(@PathVariable Long restaurantId, @PathVariable Long itemId) {
         restaurantService.deleteMenuItem(restaurantId, itemId);
         return "Deleted menu item with ID: " + itemId + " from restaurant with ID: " + restaurantId;
     }
-
 }
