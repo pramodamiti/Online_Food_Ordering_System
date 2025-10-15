@@ -51,4 +51,9 @@ public class User {
     @JsonIgnore
     private List<Review> reviews;
 
+    public User orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
+
 }

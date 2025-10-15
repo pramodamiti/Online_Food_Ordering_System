@@ -12,10 +12,11 @@ import com.foodOrder.repository.RestaurantRepository;
 import com.foodOrder.service.RestaurantService;
 
 @Service
-public class RastaurantServiceImpl implements RestaurantService {
+public class RestaurantServiceImpl implements RestaurantService {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
+
     @Autowired
     private MenuItemRepository menuItemRepository;
 
@@ -59,38 +60,59 @@ public class RastaurantServiceImpl implements RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
+    // -------------------- MenuItem Methods --------------------
     @Override
     public List<MenuItem> getAllMenuItems(Long restaurantId) {
-        return menuItemRepository.findAll();
+        // Fetch only menu items for the specified restaurant
+        return menuItemRepository.findByRestaurantRestaurantId(restaurantId);
     }
 
     @Override
     public MenuItem getMenuItemById(Long restaurantId, Long itemId) {
-        return menuItemRepository.findById(itemId).orElse(null);
-    }
-
-    @Override
-    public MenuItem addMenuItem(Long restaurantId, MenuItem menuItem) {
-        return menuItemRepository.save(menuItem);
-    }
-
-    @Override
-    public MenuItem updateMenuItem(Long restaurantId, Long itemId, MenuItem menuItem) {
-        MenuItem existingMenuItem = menuItemRepository.findById(itemId).orElse(null);
-        if (existingMenuItem != null) {
-            existingMenuItem.setName(menuItem.getName());
-            existingMenuItem.setDescription(menuItem.getDescription());
-            existingMenuItem.setPrice(menuItem.getPrice());
-            existingMenuItem.setCategory(menuItem.getCategory());
-            existingMenuItem.setIsAvailable(menuItem.getIsAvailable());
-            existingMenuItem.setRestaurant(menuItem.getRestaurant());
-            return menuItemRepository.save(existingMenuItem);
+        MenuItem menuItem = menuItemRepository.findById(itemId).orElse(null);
+        if (menuItem != null && menuItem.getRestaurant().getRestaurantId().equals(restaurantId)) {
+            return menuItem;
         }
         return null;
     }
 
     @Override
+    public MenuItem addMenuItem(Long restaurantId, MenuItem menuItem) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found: " + restaurantId));
+        menuItem.setRestaurant(restaurant);
+        return menuItemRepository.save(menuItem);
+    }
+
+    @Override
+    public MenuItem updateMenuItem(Long restaurantId, Long itemId, MenuItem menuItem) {
+        MenuItem existingMenuItem = menuItemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Menu item not found: " + itemId));
+
+        // Ensure menu item belongs to this restaurant
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RuntimeException("Restaurant not found: " + restaurantId));
+
+        existingMenuItem.setName(menuItem.getName());
+        existingMenuItem.setDescription(menuItem.getDescription());
+        existingMenuItem.setPrice(menuItem.getPrice());
+        existingMenuItem.setCategory(menuItem.getCategory());
+        existingMenuItem.setIsAvailable(menuItem.getIsAvailable());
+        existingMenuItem.setRestaurant(restaurant);
+
+        return menuItemRepository.save(existingMenuItem);
+    }
+
+    @Override
     public void deleteMenuItem(Long restaurantId, Long itemId) {
+        MenuItem menuItem = menuItemRepository.findById(itemId)
+                .orElseThrow(() -> new RuntimeException("Menu item not found: " + itemId));
+
+        // Make sure the menu item belongs to this restaurant
+        if (!menuItem.getRestaurant().getRestaurantId().equals(restaurantId)) {
+            throw new RuntimeException("Menu item does not belong to restaurant: " + restaurantId);
+        }
+
         menuItemRepository.deleteById(itemId);
     }
 
