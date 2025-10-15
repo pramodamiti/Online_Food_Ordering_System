@@ -6,5 +6,7 @@ import com.foodOrder.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    public Object findByEmail(String email);
+    public User findByEmail(String email);
+
+    public User findByName(String username);
 }

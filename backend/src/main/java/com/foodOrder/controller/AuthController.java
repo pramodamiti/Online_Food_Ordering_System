@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodOrder.config.JwtUtil;
+import com.foodOrder.dto.LoginDto;
 import com.foodOrder.entity.User;
 import com.foodOrder.service.impl.AuthService;
 
@@ -18,10 +19,8 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authManager;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private JwtUtil jwtUtil;
     @Autowired
@@ -29,11 +28,14 @@ public class AuthController {
 
     @PostMapping("/signup")
     public User signup(@RequestBody User user) {
+
+        System.err.println("user = " + user);
         return authService.signup(user);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        return authService.login(user.getName(), user.getPassword());
+    public String login(@RequestBody LoginDto loginDto) {
+        System.out.println(loginDto.toString());
+        return authService.login(loginDto);
     }
 }
