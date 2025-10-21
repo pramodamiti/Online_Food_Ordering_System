@@ -1,0 +1,233 @@
+/* signup-page.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: #070707;
+  background-image: url('/assets/bg-food-dark.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+/* card */
+.signup-container {
+  width: 920px;
+  max-width: 100%;
+  height: 520px;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden; /* ensures left image never bleeds into right */
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(8, 8, 8, 0.62), rgba(8, 8, 8, 0.6));
+  align-items: stretch;
+}
+
+/* left image panel */
+.left {
+  flex: 1;
+  min-width: 320px;
+  background-image: url('/assets/images/loginbanner.jpg');
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  display: block;
+}
+
+/* subtle overlay to darken image so right pane reads well */
+.left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+}
+
+/* logo on image */
+.logo {
+  position: absolute;
+  z-index: 2;
+  top: 18px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.36);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* right form panel */
+.right {
+  width: 380px;
+  max-width: 42%;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(12, 12, 12, 0.98));
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+/* title */
+.right h2 {
+  margin: 0 0 6px 0;
+  color: #ff7a2a;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+/* form layout - center the inputs within the right pane */
+.right form {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* inputs and select common styling */
+.right input[type='text'],
+.right input[type='email'],
+.right input[type='password'],
+.right select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow 0.16s ease, border-color 0.16s ease, transform 0.08s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) inset;
+}
+
+/* placeholder color */
+.right input::placeholder,
+.right textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* focus state */
+.right input:focus,
+.right select:focus {
+  border-color: #ff7a2a;
+  box-shadow: 0 8px 30px rgba(255, 122, 42, 0.08);
+}
+
+/* custom-styled select (appearance removed) */
+.right select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='18' height='12' viewBox='0 0 18 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' fill-opacity='0.85' d='M9 12L0 0h18z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px 9px;
+  padding-right: 46px; /* room for caret */
+  cursor: pointer;
+}
+
+/* options styling where supported */
+.right select option {
+  background: #0d0d0d;
+  color: #fff;
+}
+
+/* submit button */
+.right button[type='submit'] {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(45deg, #ff6600, #ff9933);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  margin-top: 4px;
+}
+
+.right button[type='submit']:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 122, 42, 0.12);
+}
+
+/* message & footer */
+.message {
+  color: #ffb4a3;
+  text-align: center;
+  min-height: 20px;
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+.footer {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.footer a {
+  color: #ff7a2a;
+  font-weight: 600;
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ensure no stray white strip: clip any overflow inside right pane */
+.right,
+.right * {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+/* responsive: stack panels on small screens and hide left image */
+@media (max-width: 820px) {
+  .signup-container {
+    flex-direction: column;
+    height: auto;
+    max-width: 420px;
+  }
+  .left {
+    display: none;
+  }
+  .right {
+    width: 100%;
+    max-width: 100%;
+    padding: 28px;
+  }
+  .right form {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* small visual tweak for select open dropdown on many browsers:
+   keeping dropdown within viewport by ensuring right pane has room */
+@media (max-width: 420px) {
+  .right select {
+    padding-right: 36px;
+  }
+}

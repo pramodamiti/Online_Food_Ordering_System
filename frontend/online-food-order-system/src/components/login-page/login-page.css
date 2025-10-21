@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background: #070707;
+  /* optional subtle background image */
+  background-image: url('/assets/bg-food-dark.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Card container */
+.container {
+  width: 900px;
+  max-width: 96%;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+/* Left image pane */
+.left {
+  flex: 1.05;
+  width: 320px;
+  background-image: url('/assets/food-collage.jpg'); /* replace with your collage */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Dark overlay so text is readable */
+.left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.55));
+}
+
+/* Logo on top-left of image */
+.logo {
+  position: absolute;
+  z-index: 2;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Right form pane */
+.right {
+  width: 380px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(12, 12, 12, 0.98));
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  color: #fff;
+}
+
+/* Compact form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Title */
+.login-title {
+  text-align: center;
+  color: #ff7a2a;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Inputs */
+input[type='text'],
+input[type='password'] {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  outline: none;
+  font-size: 0.95rem;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus {
+  border-color: #ff7a2a;
+  box-shadow: 0 6px 18px rgba(255, 122, 42, 0.12);
+}
+
+/* Primary submit button */
+button[type='submit'] {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(45deg, #ff6600, #ff9933);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button[type='submit']:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 140, 50, 0.12);
+}
+
+/* Message / error */
+.message {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  text-align: center;
+  min-height: 20px;
+}
+
+/* Sign up link */
+.footer {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: #ff7a2a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Social login / small circular icons */
+.social-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.social-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 0.12s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* small labels beneath social icons */
+.social-label {
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 6px;
+}
+
+/* Responsive: stack on small screens (hide left image) */
+@media (max-width: 740px) {
+  .container {
+    flex-direction: column;
+    width: 420px;
+    max-width: 96%;
+  }
+  .left {
+    display: none;
+  }
+  .right {
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+/* Auto-only carousel for left pane */
+.left {
+  flex: 1.05;
+  min-width: 320px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  height: 100%;
+}
+
+/* ensure login pane sits above carousel overlay if needed */
+.right {
+  position: relative;
+  z-index: 5;
+}
+
+/* carousel container */
+.carousel {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* slides row */
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+/* each slide full width */
+.slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+  background-color: #000;
+}
+
+/* image fits container */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* subtle dark overlay so text/login is readable */
+.left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* logo above overlay */
+.logo {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* non-interactive indicator dots (visual only) */
+.indicators {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 4;
+}
+.indicators .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+.indicators .dot.active {
+  background: #ff7a2a;
+  box-shadow: 0 6px 18px rgba(255, 122, 42, 0.12);
+}
+
+/* small screens: hide indicators to reduce clutter */
+@media (max-width: 540px) {
+  .indicators {
+    display: none;
+  }
+}

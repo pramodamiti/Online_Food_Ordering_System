@@ -23,13 +23,12 @@ public class JwtUtil {
 
     // Generate token from User entity
     public String generateToken(User user) {
-        System.out.println("Generating token for user: " + user.getEmail());
         return Jwts.builder()
                 .setSubject(user.getEmail())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                .signWith(SECRET_KEY)
-                .compact();
+                        .setIssuedAt(new Date())
+                        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                        .signWith(SECRET_KEY)
+                        .compact();
     }
 
     // Extract username from token

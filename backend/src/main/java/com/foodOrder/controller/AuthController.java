@@ -35,7 +35,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestBody LoginDto loginDto) {
-        System.out.println(loginDto.toString());
         return authService.login(loginDto);
     }
 }

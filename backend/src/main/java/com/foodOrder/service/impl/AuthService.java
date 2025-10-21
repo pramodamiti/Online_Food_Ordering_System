@@ -37,10 +37,9 @@ public class AuthService {
         // Save user
         return userRepository.save(user);
     }
-   // Login method
-    public String login(LoginDto loginDto) {
+    // Login method
 
-        System.out.println(loginDto);
+    public String login(LoginDto loginDto) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
