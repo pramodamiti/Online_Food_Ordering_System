@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:ital,wght@1,700&display=swap');
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: orange;
+  color: white;
+}
+
+.logo h2 {
+  font-family: 'Dancing Script', cursive;
+  font-style: italic;
+  font-weight: 2000;
+  font-size: 28px;
+  margin: 0;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 20px;
+  display: flex;
+  width: 200px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 5px 10px;
+  border-radius: 4px 0 0 4px;
+  border: none;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  border: none;
+  background-color: orange;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.nav-links a,
+.nav-links button {
+  margin-left: 15px;
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.nav-links button:hover,
+.nav-links a:hover {
+  text-decoration: underline;
+}
