@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: 40px;
+}
+
+.profile-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* GRID LAYOUT */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 20px;
+  margin-bottom: 30px;
+}
+
+.profile-grid label {
+  font-weight: 600;
+  color: #444;
+  text-align: left;
+}
+
+.profile-grid input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* SAVE BUTTON */
+.save-btn {
+  width: 250px;
+  padding: 14px;
+  font-size: 18px;
+  background: #2196f3;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.save-btn:hover {
+  background: #1976d2;
+}

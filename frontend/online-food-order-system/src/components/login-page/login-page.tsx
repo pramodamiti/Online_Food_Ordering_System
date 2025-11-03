@@ -54,8 +54,9 @@ export class LoginPage {
 
       if (!res.ok) throw new Error('Invalid credentials');
 
-      const token = await res.text();
-      localStorage.setItem('jwt', token);
+      const data = await res.json();
+      localStorage.setItem('jwt', data.token);
+      localStorage.setItem('userId', data.userId);
       this.message = 'Login successful!';
       setTimeout(() => {
         history.pushState({}, '', '/home');

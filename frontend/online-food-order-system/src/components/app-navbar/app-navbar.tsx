@@ -32,6 +32,8 @@ export class AppNavbar {
         </div>
 
         <div class="nav-links">
+          {this.loggedIn && <a href="/order">Orders</a>}
+          {this.loggedIn && <a href="/cart">Cart</a>}
           {!this.loggedIn && <a href="/login">Login</a>}
           {!this.loggedIn && <a href="/signup">Signup</a>}
           {this.loggedIn && <a href="/profile">Profile</a>}
