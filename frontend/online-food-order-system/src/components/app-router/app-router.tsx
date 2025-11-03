@@ -27,6 +27,12 @@ export class AppRouter {
         return <signup-page />;
       case '/home':
         return <home-page />;
+      case '/cart':
+        return <cart-items />;
+      case '/order':
+        return <order-page />;
+      case '/profile':
+        return <user-profile />;
       default:
         return <home-page />;
     }

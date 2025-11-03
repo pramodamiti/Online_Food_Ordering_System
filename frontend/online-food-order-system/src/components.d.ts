@@ -12,11 +12,19 @@ export namespace Components {
     }
     interface AppRouter {
     }
+    interface CartItems {
+    }
+    interface HomeItems {
+    }
     interface HomePage {
     }
     interface LoginPage {
     }
+    interface OrderPage {
+    }
     interface SignupPage {
+    }
+    interface UserProfile {
     }
 }
 export interface LoginPageCustomEvent<T> extends CustomEvent<T> {
@@ -42,6 +50,18 @@ declare global {
         prototype: HTMLAppRouterElement;
         new (): HTMLAppRouterElement;
     };
+    interface HTMLCartItemsElement extends Components.CartItems, HTMLStencilElement {
+    }
+    var HTMLCartItemsElement: {
+        prototype: HTMLCartItemsElement;
+        new (): HTMLCartItemsElement;
+    };
+    interface HTMLHomeItemsElement extends Components.HomeItems, HTMLStencilElement {
+    }
+    var HTMLHomeItemsElement: {
+        prototype: HTMLHomeItemsElement;
+        new (): HTMLHomeItemsElement;
+    };
     interface HTMLHomePageElement extends Components.HomePage, HTMLStencilElement {
     }
     var HTMLHomePageElement: {
@@ -65,19 +85,35 @@ declare global {
         prototype: HTMLLoginPageElement;
         new (): HTMLLoginPageElement;
     };
+    interface HTMLOrderPageElement extends Components.OrderPage, HTMLStencilElement {
+    }
+    var HTMLOrderPageElement: {
+        prototype: HTMLOrderPageElement;
+        new (): HTMLOrderPageElement;
+    };
     interface HTMLSignupPageElement extends Components.SignupPage, HTMLStencilElement {
     }
     var HTMLSignupPageElement: {
         prototype: HTMLSignupPageElement;
         new (): HTMLSignupPageElement;
     };
+    interface HTMLUserProfileElement extends Components.UserProfile, HTMLStencilElement {
+    }
+    var HTMLUserProfileElement: {
+        prototype: HTMLUserProfileElement;
+        new (): HTMLUserProfileElement;
+    };
     interface HTMLElementTagNameMap {
         "app-navbar": HTMLAppNavbarElement;
         "app-root": HTMLAppRootElement;
         "app-router": HTMLAppRouterElement;
+        "cart-items": HTMLCartItemsElement;
+        "home-items": HTMLHomeItemsElement;
         "home-page": HTMLHomePageElement;
         "login-page": HTMLLoginPageElement;
+        "order-page": HTMLOrderPageElement;
         "signup-page": HTMLSignupPageElement;
+        "user-profile": HTMLUserProfileElement;
     }
 }
 declare namespace LocalJSX {
@@ -87,20 +123,32 @@ declare namespace LocalJSX {
     }
     interface AppRouter {
     }
+    interface CartItems {
+    }
+    interface HomeItems {
+    }
     interface HomePage {
     }
     interface LoginPage {
         "onLoginSuccess"?: (event: LoginPageCustomEvent<void>) => void;
     }
+    interface OrderPage {
+    }
     interface SignupPage {
+    }
+    interface UserProfile {
     }
     interface IntrinsicElements {
         "app-navbar": AppNavbar;
         "app-root": AppRoot;
         "app-router": AppRouter;
+        "cart-items": CartItems;
+        "home-items": HomeItems;
         "home-page": HomePage;
         "login-page": LoginPage;
+        "order-page": OrderPage;
         "signup-page": SignupPage;
+        "user-profile": UserProfile;
     }
 }
 export { LocalJSX as JSX };
@@ -110,9 +158,13 @@ declare module "@stencil/core" {
             "app-navbar": LocalJSX.AppNavbar & JSXBase.HTMLAttributes<HTMLAppNavbarElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "app-router": LocalJSX.AppRouter & JSXBase.HTMLAttributes<HTMLAppRouterElement>;
+            "cart-items": LocalJSX.CartItems & JSXBase.HTMLAttributes<HTMLCartItemsElement>;
+            "home-items": LocalJSX.HomeItems & JSXBase.HTMLAttributes<HTMLHomeItemsElement>;
             "home-page": LocalJSX.HomePage & JSXBase.HTMLAttributes<HTMLHomePageElement>;
             "login-page": LocalJSX.LoginPage & JSXBase.HTMLAttributes<HTMLLoginPageElement>;
+            "order-page": LocalJSX.OrderPage & JSXBase.HTMLAttributes<HTMLOrderPageElement>;
             "signup-page": LocalJSX.SignupPage & JSXBase.HTMLAttributes<HTMLSignupPageElement>;
+            "user-profile": LocalJSX.UserProfile & JSXBase.HTMLAttributes<HTMLUserProfileElement>;
         }
     }
 }

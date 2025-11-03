@@ -17,6 +17,9 @@ export class HomePage {
         <div class="navbar">
           <app-navbar />
         </div>
+        <div class="menu-items">
+          <home-items></home-items>
+        </div>
       </div>
     );
   }
